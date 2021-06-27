@@ -82,7 +82,9 @@ for ($i = 1; $i <= $result['_id']; (int)$i=(int)$i+1) {
 <html lang="ja">
 <html>
     <head>
-        <meta http-equiv="Cache-Control" content="no-cache">
+     <meta http-equiv="Pragma" content="no-cache" />
+     <meta http-equiv="cache-control" content="no-cache" />
+     <meta http-equiv="expires" content="0" />
         <title>app</title>
         <meta charset="UTF-8">
         <link href="test.css" rel="stylesheet">
@@ -100,19 +102,20 @@ for ($i = 1; $i <= $result['_id']; (int)$i=(int)$i+1) {
 使い方B<br>
 1.地図に表示された場所に向かいます<br>
 2.誰かと会えます<br>
+更新されない場合はキャッシュを切ってみてください<br>
           </div>
          </div>
  
          <footer>
            <div id="foot" style="width:700px; height:300px" class="main">
-              <form action=# method="post">
+              <form action="#" method="post">
                <p>お名前<br></p>
                <p><input type="text" name="namet"value="名無しさん" ></p>
                <p>密の名前<br>
                <input type="text" name="pname"></p>
                <p>密の説明<br>
                <textarea name="comment" cols="30" rows="5"></textarea></p>
-               <p><input type="submit" value="密の作成！" name="add" onclick="alert('作成しました');document.cookie = 'my='+(<?php echo ($rec_max) ?>+1)"></p>
+               <p><input type="submit" value="密の作成！" name="add" onclick="alert('作成しました');document.cookie = 'my='+(<?php echo ($rec_max) ?>+1);location.reload();"></p>
               <form/>
            </div>
          </footer>
@@ -141,6 +144,8 @@ function ButtonClick() {
  $cook=$_COOKIE['my'];
  $stmt = $dbh->query ("DELETE FROM human WHERE _id='".$cook."'");
  ?>
+ document.cookie = 'my=0';
+ location.reload();
 }
 </script>
     </body>
