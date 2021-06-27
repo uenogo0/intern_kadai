@@ -8,34 +8,23 @@ function initMap() {
         mapTypeId: google.maps.MapTypeId.ROADMAP 
       };
       var map = new google.maps.Map(mapArea, mapOptions);
-//ここが間違っている
-      var max = '<?php echo ($rec_max); ?>'; 
-      var ido = '<?php echo ($rec_i); ?>';
-      var k = '<?php echo ($rec_k); ?>';
-      var ibent = '<?php echo ($rec_ibent); ?>';
-      var com = '<?php echo ($rec_com); ?>';
-      var name = '<?php echo ($rec_name); ?>';
-/*アイコンを置く処理はこんな感じ？
-    var marker=[];
-    for (let i = 0; i <= max; i++) {
-      mapPosition = {lat: ido[i], lng: k[i]};
-      var markerOptions = {
-        map: map,
-        position: mapPosition,
-      };
-      marker[i] = new google.maps.Marker(markerOptions);
-      var html = "<div>"+ibent[i]+"\n"+com[i]+"</div>";
-      marker[i].openInfoWindowHtml(html);
-    }
-*/
-//
-     
-      alert(max);
-      var markerOptions = {
-        map: map,
-        position: mapPosition,
-      };
-      var marker = new google.maps.Marker(markerOptions);
+
+
+for(let i=1;i<=max2;i++){
+   var marker=[];
+   if(named[i] !='0'){
+   var markerOptions = {
+    map: map,
+    position: new google.maps.LatLng(ido[i],k[i]),
+    title: "title"
+   }
+    var markers = new google.maps.Marker(markerOptions);
+    google.maps.event.addListener(markers,'click',function(event){
+     alert(named[i]+"\n"+ibent[i]+"\n"+com[i]+"\n");
+    });
+    let newLength = marker.unshift(markers);
+   }
+}
 
       navigator.geolocation.getCurrentPosition(
        function (pos){
